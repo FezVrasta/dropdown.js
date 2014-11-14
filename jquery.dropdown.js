@@ -7,7 +7,7 @@
             "optionClass": "",
             "dropdownClass": "",
             "autoinit": false,
-            callback: false
+            "callback": false
         },
         init: function(options) {
 
