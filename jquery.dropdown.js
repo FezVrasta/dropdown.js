@@ -141,15 +141,18 @@
                     selectOptions.each(function() { $(this).attr("tabindex", 0); });
 
                     // Set height of the dropdown
-                    var windowH = $(window).height(),
-                        scrollTop = $(window).scrollTop(),
-                        offset = $(this).offset();
+                    var coords = {
+                        top: $(this).offset().top - $(document).scrollTop(),
+                        left: $(this).offset().left - $(document).scrollLeft(),
+                        bottom: $(window).height() - ($(this).offset().top - $(document).scrollTop()),
+                        right: $(window).width() - ($(this).offset().left - $(document).scrollLeft())
+                    };
 
-                    var height = windowH - offset.top;
+                    var height = coords.bottom;
 
                     // Decide if place the dropdown below or above the input
-                    if (height < 80 && windowH > (offset.top - scrollTop)) {
-                        height = offset.top - scrollTop;
+                    if (height < 200 && coords.top > coords.bottom) {
+                        height = coords.top;
                         $ul.attr("placement", "top-left");
                     } else {
                         $ul.attr("placement", "bottom-left");
