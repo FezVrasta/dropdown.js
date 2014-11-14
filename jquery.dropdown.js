@@ -34,6 +34,7 @@
 
                 // Create the fake input used as "select" element and cache it as $input
                 var $input = $("<input type=text readonly>");
+                if ($.material) { $input.data("mdproc", true); }
                 // Append it to the dropdown wrapper
                 $dropdown.append($input);
 
