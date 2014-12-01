@@ -99,7 +99,7 @@
         $input.addClass($select[0].className);
 
         // Hide the old and ugly select
-        $select.hide().data("dropdownjs", true);
+        $select.hide().attr("data-dropdownjs", true);
 
         // Bring to life our awesome dropdownjs
         $select.after($dropdown);
@@ -129,12 +129,18 @@
         });
 
         selectOptions.on("focus", function() {
+          if ($select.is(":disabled")) {
+            return;
+          }
           $input.addClass("focus");
         });
 
         // Used to make the dropdown menu more dropdown-ish
         $input.on("click focus", function(e) {
           e.stopPropagation();
+          if ($select.is(":disabled")) {
+            return;
+          }
           $(".dropdownjs > ul > li").each(function() { $(this).attr("tabindex", -1); });
           $(".dropdownjs > input").not($(this)).removeClass("focus").blur();
 
