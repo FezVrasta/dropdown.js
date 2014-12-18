@@ -116,6 +116,8 @@
         // On click, set the clicked one as selected
         selectOptions.on("click", function(e) {
           methods._select($dropdown, $(this));
+          // trigger change event, if declared on the original selector
+          $select.change();
         });
         selectOptions.on("keydown", function(e) {
           if (e.which === 27) {
