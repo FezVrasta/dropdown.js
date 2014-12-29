@@ -12,7 +12,11 @@
     init: function(options) {
 
       // Apply user options if user has defined some
-      options = (options) ? $.extend(methods.options, options) : methods.options;
+      if (options) {
+        options = $.extend(methods.options, options);
+      } else {
+        options = methods.options;
+      }
 
       function initElement($select) {
         // Don't do anything if this is not a select or if this select was already initialized
@@ -53,9 +57,6 @@
 
           // Style the option
           $option.addClass(options.optionStyle);
-
-          // Save the original option inside the li element
-          $option.data("option", $this);
 
           // If the option has some text then transfer it
           if ($this.text()) {
@@ -98,7 +99,7 @@
         $input.addClass($select[0].className);
 
         // Hide the old and ugly select
-        $select.hide().data("dropdownjs", true);
+        $select.hide().attr("data-dropdownjs", true);
 
         // Bring to life our awesome dropdownjs
         $select.after($dropdown);
@@ -115,6 +116,8 @@
         // On click, set the clicked one as selected
         selectOptions.on("click", function(e) {
           methods._select($dropdown, $(this));
+          // trigger change event, if declared on the original selector
+          $select.change();
         });
         selectOptions.on("keydown", function(e) {
           if (e.which === 27) {
@@ -128,12 +131,18 @@
         });
 
         selectOptions.on("focus", function() {
+          if ($select.is(":disabled")) {
+            return;
+          }
           $input.addClass("focus");
         });
 
         // Used to make the dropdown menu more dropdown-ish
         $input.on("click focus", function(e) {
           e.stopPropagation();
+          if ($select.is(":disabled")) {
+            return;
+          }
           $(".dropdownjs > ul > li").each(function() { $(this).attr("tabindex", -1); });
           $(".dropdownjs > input").not($(this)).removeClass("focus").blur();
 
@@ -200,11 +209,12 @@
         // Toggle option state
         $target.toggleClass("selected");
         // Toggle selection of the clicked option in native select
-        var $selected = $target.data("option");
-        if ($selected[0]) {
-          $selected[0].selected = !$selected[0].selected;
+        var $selected = $select.find("[value=\"" + $target.attr("value") + "\"]");
+        if ($selected.attr("selected")) {
+          $selected.attr("selected", true);
+        } else {
+          $selected.attr("selected", false);
         }
-        $select.trigger("change");
         // Add or remove the value from the input
         var text = [];
         selectOptions.each(function() {
@@ -222,14 +232,18 @@
         // Select the selected option
         $target.addClass("selected");
         // Set the value to the native select
-        $select.val($target.attr("value")).trigger("change");
+        $select.val($target.attr("value"));
         // Set the value to the input
         $input.val($target.text());
       }
 
       // This is used only if Material Design for Bootstrap is selected
       if ($.material) {
-        $select.toggleClass("empty", !$input.val().trim());
+        if ($input.val().trim()) {
+          $select.removeClass("empty");
+        } else {
+          $select.addClass("empty");
+        }
       }
 
     }

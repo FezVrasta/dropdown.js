@@ -5,8 +5,7 @@
   box-sizing: border-box;
 }
 .dropdownjs > input {
-  width: 100%;
-  cursor: pointer !important;
+    width: 100%;
 }
 .dropdownjs > input.focus ~ ul {
   transform: scale(1);
@@ -36,8 +35,11 @@
 
 
 /* Theme */
-.dropdownjs > input {
-  cursor: pointer;
+.dropdownjs > input[readonly] {
+    cursor: pointer;
+}
+select[data-dropdownjs][disabled] + .dropdownjs > input[readonly] {
+  cursor: default;
 }
 .dropdownjs > ul {
   background: #FFF;
