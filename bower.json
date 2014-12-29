@@ -1,0 +1,29 @@
+{
+  "name": "dropdown.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/FezVrasta/dropdown.js",
+  "authors": [
+    "Federico Zivolo <info@mywebexpression.com>"
+  ],
+  "description": "Finally a dropdown plugin that transforms select inputs in nice dropdowns and does not drive you crazy.",
+  "main": ["jquery.dropdown.js", "jquery.dropdown.css"],
+  "keywords": [
+    "dropdown",
+    "dropdown.js",
+    "choosen",
+    "selectize",
+    "select",
+    "multiselect"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}

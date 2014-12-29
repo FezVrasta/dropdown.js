@@ -1,88 +1,98 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material-wfont.min.css" rel="stylesheet">
-        <link href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/ripples.min.css" rel="stylesheet">
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material-wfont.min.css" rel="stylesheet">
+    <link href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/ripples.min.css" rel="stylesheet">
 
-        <link href="jquery.dropdown.css" rel="stylesheet">
-    </head>
-    <body>
+    <link href="jquery.dropdown.css" rel="stylesheet">
+  </head>
+  <body>
 
-        <button>Click</button>
+    <button>Click</button>
 
-        <select multiple class="select form-control floating-label" placeholder="This is a placeholder">
-            <option></option>
-            <option selected>Foobar</option>
-            <option selected>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option selected>Foobar</option>
-            <option selected>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option selected>Foobar</option>
-            <option selected>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option selected>Foobar</option>
-            <option selected>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option selected>Foobar</option>
-            <option selected>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-            <option>Foobar</option>
-            <option>Is great</option>
-        </select>
+    <select multiple class="select form-control floating-label" placeholder="This is a placeholder">
+      <option></option>
+      <option selected>Foobar</option>
+      <option selected>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option selected>Foobar</option>
+      <option selected>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option selected>Foobar</option>
+      <option selected>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option selected>Foobar</option>
+      <option selected>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option selected>Foobar</option>
+      <option selected>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+      <option>Foobar</option>
+      <option>Is great</option>
+    </select>
 
-        <br><br><br>
-        <br><br><br>
-        <br><br><br>
-        <select class="select" placeholder="This is a placeholder">
-            <option></option>
-            <option>Foobar</option>
-            <option value="hi..." selected>Is great</option>
-        </select>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <select class="select" placeholder="This is a placeholder">
+      <option></option>
+      <option>Foobar</option>
+      <option value="hi..." selected>Is great</option>
+    </select>
 
+    <br><br><br>
 
-
-
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
-        <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/ripples.min.js"></script>
-
-        <script src="jquery.dropdown.js"></script>
-        <script>
-            $.material.init();
-
-            $(document).ready(function() {
-                $(".select").dropdown({"optionClass": "withripple"});
-            });
-
-            $("button").click(function() {
-                $("body").append("<select class=select><option>hey</option></select>");
-            });
-
-        </script>
+    <select id="multi" multiple>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
 
 
-        <style>
-            body {
-                width: 200px;
-                margin: 100px;
-            }
-        </style>
 
-    </body>
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+    <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/ripples.min.js"></script>
+
+    <script src="jquery.dropdown.js"></script>
+    <script>
+      $.material.init();
+
+      $(document).ready(function() {
+        $(".select").dropdown({"optionClass": "withripple"});
+      });
+
+      $().dropdown({autoinit: "select"});
+
+      $("button").click(function() {
+        $("body").append("<select class=select><option>hey</option><option>hey</option></select>");
+      });
+
+    </script>
+
+
+    <style>
+      body {
+        width: 200px;
+        margin: 100px;
+      }
+    </style>
+
+  </body>
 </html>
 
