@@ -305,7 +305,7 @@
 
       // Ss it selected?
       if ($this.prop("selected")) {
-        $option.prop("selected", true);
+        $option.attr("selected", true);
       }
 
       // Append option to our dropdown
