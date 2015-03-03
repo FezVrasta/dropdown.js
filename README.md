@@ -59,3 +59,19 @@ You may add a new option to the select tag and it will be automatically added to
 ### Let users add options
 
 Add `data-dynamic-opts=true` to the select tag to let users add or remove options.
+
+### Browserify
+
+This library is [UMD](https://github.com/umdjs/umd) compatible, so you can use it in this way:
+
+```javascript
+var jquery = require("jquery");
+require("dropdown.js");
+
+jquery.material.init();
+
+jquery(document).ready(function() {
+    $(".select").dropdown({"optionClass": "withripple"});
+});
+...
+```
