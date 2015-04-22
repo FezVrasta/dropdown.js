@@ -88,15 +88,15 @@
         // If is a single select, selected the first one or the last with selected attribute
         if (!multi) {
           var $selected;
-          if ($ul.find("[selected]").length) {
-            $selected = $ul.find("[selected]").last();
+          if ($ul.find(":selected").length) {
+            $selected = $ul.find(":selected").last();
           }
           else {
             $selected = $ul.find("li").first();
           }
           methods._select($dropdown, $selected);
         } else {
-          methods._select($dropdown, $ul.find("[selected]"));
+          methods._select($dropdown, $ul.find(":selected"));
         }
 
         // Transfer the classes of the select to the input dropdown
