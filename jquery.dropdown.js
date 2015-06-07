@@ -19,6 +19,7 @@
       "dropdownClass": "",
       "autoinit": false,
       "callback": false,
+      "onSelected": false,
       "dynamicOptLabel": "Add a new option..."
     },
     init: function(options) {
@@ -286,6 +287,11 @@
           $select.addClass("empty");
         }
       }
+      
+       // Call the callback
+        if (this.options.onSelected) {
+            this.options.onSelected($target.attr("value"));
+        }
 
     },
     _addOption: function($ul, $this) {
