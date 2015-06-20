@@ -274,7 +274,7 @@
         // Set the value to the native select
         $select.val($target.attr("value"));
         // Set the value to the input
-        $input.val($target.text());
+        $input.val($target.text().trim());
       }
 
       // This is used only if Material Design for Bootstrap is selected
