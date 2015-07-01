@@ -19,6 +19,7 @@
       "dropdownClass": "",
       "autoinit": false,
       "callback": false,
+      "onSelected": false,
       "dynamicOptLabel": "Add a new option..."
     },
     init: function(options) {
@@ -87,16 +88,17 @@
 
         // If is a single select, selected the first one or the last with selected attribute
         if (!multi) {
-          var $selected;
-          if ($ul.find(":selected").length) {
-            $selected = $ul.find(":selected").last();
-          }
-          else {
-            $selected = $ul.find("li").first();
-          }
-          methods._select($dropdown, $selected);
+            var $selected;
+            if ($select.find(":selected").length) {
+                $selected = $select.find(":selected").last();
+            }
+            else {
+                $selected = $select.find("option, li").first();
+               // $selected = $select.find("option").first();
+            }
+            methods._select($dropdown, $selected);
         } else {
-          methods._select($dropdown, $ul.find(":selected"));
+            methods._select($dropdown, $select.find(":selected"));
         }
 
         // Transfer the classes of the select to the input dropdown
@@ -285,6 +287,11 @@
           $select.addClass("empty");
         }
       }
+      
+       // Call the callback
+        if (this.options.onSelected) {
+            this.options.onSelected($target.attr("value"));
+        }
 
     },
     _addOption: function($ul, $this) {
