@@ -218,7 +218,10 @@
       if (options.autoinit) {
         $(document).on("DOMNodeInserted", function(e) {
           var $this = $(e.target);
-          if ($this.is("select") && $this.is(options.autoinit)) {
+          if (!$this.is("select")) {
+            $this = $this.find('select');
+          }
+          if ($this.is(options.autoinit)) {
             initElement($this);
           }
         });
