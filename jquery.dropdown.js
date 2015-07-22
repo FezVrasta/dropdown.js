@@ -261,7 +261,7 @@
         // Toggle selection of the clicked option in native select
         $target.each(function(){
           var $selected = $select.find("[value=\"" + $(this).attr("value") + "\"]");
-          $selected.prop("selected", $target.prop("selected"));
+          $selected.prop("selected", $(this).hasClass("selected"));
         })
         // Add or remove the value from the input
         var text = [];
