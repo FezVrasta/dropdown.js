@@ -98,7 +98,13 @@
             }
             methods._select($dropdown, $selected);
         } else {
-            methods._select($dropdown, $select.find(":selected"));
+            var selectors = [], val = $select.val()
+            for (var i in val) {
+              selectors.push('li[value=' + val[i] + ']')
+            }
+            if (selectors.length > 0) {
+              methods._select($dropdown, $dropdown.find(selectors.join(',')));
+            }
         }
 
         // Transfer the classes of the select to the input dropdown
@@ -218,7 +224,10 @@
       if (options.autoinit) {
         $(document).on("DOMNodeInserted", function(e) {
           var $this = $(e.target);
-          if ($this.is("select") && $this.is(options.autoinit)) {
+          if (!$this.is("select")) {
+            $this = $this.find('select');
+          }
+          if ($this.is(options.autoinit)) {
             initElement($this);
           }
         });
@@ -239,7 +248,6 @@
       // Get dropdown's elements
       var $select = $dropdown.data("select"),
           $input  = $dropdown.find("input.fakeinput");
-
       // Is it a multi select?
       var multi = $select.attr("multiple");
 
@@ -251,12 +259,10 @@
         // Toggle option state
         $target.toggleClass("selected");
         // Toggle selection of the clicked option in native select
-        var $selected = $select.find("[value=\"" + $target.attr("value") + "\"]");
-        if ($selected.prop("selected")) {
-          $selected.prop("selected", true);
-        } else {
-          $selected.prop("selected", false);
-        }
+        $target.each(function(){
+          var $selected = $select.find("[value=\"" + $(this).attr("value") + "\"]");
+          $selected.prop("selected", $(this).hasClass("selected"));
+        })
         // Add or remove the value from the input
         var text = [];
         selectOptions.each(function() {
