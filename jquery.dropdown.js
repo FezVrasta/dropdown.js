@@ -173,6 +173,25 @@
           $ul.find("li").not(".dropdownjs-add").attr("tabindex", 0);
 
         });
+        
+        // Update dropdown when using val, need to use .val("value").trigger("change");
+        $select.on("change", function(e) {
+          var $this = $(e.target);
+          if (!$this.val().length) return;
+
+          if (!multi) {
+            var $selected;
+            if ($select.find(":selected").length) {
+              $selected = $select.find(":selected").last();
+            }
+            else {
+              $selected = $select.find("option, li").first();
+            }
+            methods._select($dropdown, $selected);
+          } else {
+            methods._select($dropdown, $select.find(":selected"));
+          }
+        });
 
         // Used to make the dropdown menu more dropdown-ish
         $input.on("click focus", function(e) {
