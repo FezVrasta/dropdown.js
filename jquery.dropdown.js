@@ -295,7 +295,9 @@
       // Behavior for single select
       if (!multi) {
         // Unselect options except the one that will be selected
-        if($target[0].tagName.toUpperCase()=="LI") {selectOptions.not($target).removeClass("selected"); }
+        if ($target.is("li")) {
+            selectOptions.not($target).removeClass("selected");
+        }
         // Select the selected option
         $target.addClass("selected");
         // Set the value to the native select
@@ -349,7 +351,7 @@
       // Ss it selected?
       if ($this.prop("selected")) {
         $option.attr("selected", true);
-		$option.addClass("selected");
+        $option.addClass("selected");
       }
 
       // Append option to our dropdown
