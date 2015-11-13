@@ -247,7 +247,9 @@
             $this = $this.find('select');
           }
           if ($this.is(options.autoinit)) {
-            initElement($this);
+            $this.each(function() {
+              initElement($(this));
+            });
           }
         });
       }
