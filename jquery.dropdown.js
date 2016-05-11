@@ -46,7 +46,7 @@
 
         // Create the dropdown wrapper
         var $dropdown = $("<div></div>");
-        $dropdown.addClass("dropdownjs").addClass(options.dropdownStyle);
+        $dropdown.addClass("dropdownjs").addClass(options.dropdownClass);
         $dropdown.data("select", $select);
 
         // Create the fake input used as "select" element and cache it as $input
@@ -173,7 +173,7 @@
           $ul.find("li").not(".dropdownjs-add").attr("tabindex", 0);
 
         });
-        
+
         // Update dropdown when using val, need to use .val("value").trigger("change");
         $select.on("change", function(e) {
           var $this = $(e.target);
@@ -316,7 +316,7 @@
           $select.addClass("empty");
         }
       }
-      
+
        // Call the callback
         if (this.options.onSelected) {
             this.options.onSelected($target.attr("value"));
@@ -328,7 +328,7 @@
       var $option = $("<li></li>");
 
       // Style the option
-      $option.addClass(this.options.optionStyle);
+      $option.addClass(this.options.optionClass);
 
       // If the option has some text then transfer it
       if ($this.text()) {
