@@ -253,7 +253,6 @@
     },
     select: function(target) {
       var $target = $(this).find("[value=\"" + target + "\"]");
-      console.log("called from select");
       methods._select($(this), $target);
     },
     _select: function($dropdown, $target) {
