@@ -20,6 +20,9 @@
       "autoinit": false,
       "callback": false,
       "onSelected": false,
+      "destroy": function(element) {
+        this.destroy(element);
+      },
       "dynamicOptLabel": "Add a new option..."
     },
     init: function(options) {
@@ -177,6 +180,18 @@
         $select.on("DOMNodeRemoved", function(e) {
           var deletedValue = e.target.getAttribute('value');
           $ul.find("li[value='"+deletedValue+"']").remove();
+          var $selected;
+
+          setTimeout(function () {
+            if ($select.find(":selected").length) {
+              $selected = $select.find(":selected").last();
+            }
+            else {
+              $selected = $select.find("option, li").first();
+            }
+            methods._select($dropdown, $selected);
+          }, 100);
+
         });
 
         // Update dropdown when using val, need to use .val("value").trigger("change");
