@@ -382,10 +382,14 @@
       } else {
         $ul.append($option);
       }
+    },
+    destroy: function($e) {
+      $($e).show().removeAttr('data-dropdownjs').next('.dropdownjs').remove();
     }
   };
 
   $.fn.dropdown = function(params) {
+    if( typeof methods[params] == 'function' ) methods[params](this);
     if (methods[params]) {
       return methods[params].apply(this, Array.prototype.slice.call(arguments,1));
     } else if (typeof params === "object" | !params) {
