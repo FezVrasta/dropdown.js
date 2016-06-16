@@ -328,9 +328,6 @@
         }
 
     },
-    _removeOption: function ($ul, $this) {
-      console.warn(arguments);
-    },
     _addOption: function($ul, $this) {
       // Create the option
       var $option = $("<li></li>");
