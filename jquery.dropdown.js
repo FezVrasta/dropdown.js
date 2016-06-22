@@ -170,7 +170,6 @@
         // Update dropdown when using val, need to use .val("value").trigger("change");
         $select.on("change", function(e) {
           var $this = $(e.target);
-          if (!$this.val().length) return;
 
           if (!multi) {
             var $selected;
