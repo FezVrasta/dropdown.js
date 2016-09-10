@@ -236,9 +236,9 @@
           // Decide if place the dropdown below or above the input
           if (height < 200 && coords.top > coords.bottom) {
             height = coords.top;
-            $ul.attr("placement", "top-left");
+            $ul.attr("placement", $("body").hasClass("rtl") ? "top-right" : "top-left");
           } else {
-            $ul.attr("placement", "bottom-left");
+            $ul.attr("placement", $("body").hasClass("rtl") ? "bottom-right" : "bottom-left");
           }
 
           $(this).next("ul").css("max-height", height - 20);
