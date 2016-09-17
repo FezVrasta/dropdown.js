@@ -92,7 +92,7 @@ select[data-dropdownjs][disabled] + .dropdownjs > input[readonly] {
   text-shadow: 0 1px 0 #fff;
   opacity: .6;
 }
-.dropdownjs > ul > li:h > .close:hover:before {
+.dropdownjs > ul > li:hover > .close:hover:before {
   opacity: .9;
 }
 
