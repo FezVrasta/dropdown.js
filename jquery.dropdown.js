@@ -106,7 +106,9 @@
               selectors.push('li[value=' + val[i] + ']')
             }
             if (selectors.length > 0) {
-              methods._select($dropdown, $dropdown.find(selectors.join(',')));
+              var $target = $dropdown.find(selectors.join(','));
+              $target.removeClass("selected");
+              methods._select($dropdown, $target);
             }
         }
 
@@ -208,7 +210,7 @@
             }
             methods._select($dropdown, $selected);
           } else {
-            methods._select($dropdown, $select.find(":selected"));
+            // methods._select($dropdown, $select.find(":selected"));
           }
         });
 
