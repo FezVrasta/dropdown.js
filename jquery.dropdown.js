@@ -210,7 +210,14 @@
             }
             methods._select($dropdown, $selected);
           } else {
-            // methods._select($dropdown, $select.find(":selected"));
+            var target = $select.find(":selected");
+            // Unselect all options
+            selectOptions.removeClass("selected");
+            // Select options
+            target.each(function () {
+                var selected = selectOptions.filter("[value=\"" + $(this).attr("value") + "\"]");
+                selected.addClass("selected");
+            });
           }
         });
 
