@@ -274,11 +274,11 @@
           if (!$this.is("select")) {
             $this = $this.find('select');
           }
-          if ($this.is(options.autoinit)) {
             $this.each(function() {
-              initElement($(this));
+                if ($(this).is(options.autoinit)) {
+                    initElement($(this));
+                }
             });
-          }
         });
       }
 
