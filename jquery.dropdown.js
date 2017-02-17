@@ -264,6 +264,9 @@
 
           // Close opened dropdowns
           $(".dropdownjs > ul > li").attr("tabindex", -1);
+          if (e.target.getAttribute('disabled')) {
+          return;
+        }
           $input.removeClass("focus");
         });
       }
@@ -292,6 +295,7 @@
       methods._select($(this), $target);
     },
     _select: function($dropdown, $target) {
+
       if ($target.is(".dropdownjs-add")) return;
 
       // Get dropdown's elements
@@ -324,6 +328,9 @@
 
       // Behavior for single select
       if (!multi) {
+        if ($target.attr("disabled")) {
+          return;
+        }
         // Unselect options except the one that will be selected
         if ($target.is("li")) {
             selectOptions.not($target).removeClass("selected");
@@ -382,6 +389,11 @@
       if ($this.prop("selected")) {
         $option.attr("selected", true);
         $option.addClass("selected");
+      }
+
+      if ($this.prop("disabled")) {
+        $option.attr("disabled", true);
+        $option.addClass("disabled");
       }
 
       // Append option to our dropdown
