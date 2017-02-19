@@ -92,6 +92,33 @@ select[data-dropdownjs][disabled] + .dropdownjs > input[readonly] {
   text-shadow: 0 1px 0 #fff;
   opacity: .6;
 }
-.dropdownjs > ul > li:h > .close:hover:before {
+.dropdownjs > ul > li:hover > .close:hover:before {
   opacity: .9;
+}
+
+.rtl .dropdownjs > input{
+	padding-right: 0;
+	padding-left: 30px;
+}
+
+.rtl .dropdownjs > ul[placement=top-right] {
+  -webkit-transform-origin: bottom right;
+      -ms-transform-origin: bottom right;
+          transform-origin: bottom right;
+  bottom: 0;
+  left: auto;
+  right: 0;
+}
+.rtl .dropdownjs > ul[placement=bottom-right] {
+  -webkit-transform-origin: top right;
+      -ms-transform-origin: top right;
+          transform-origin: top right;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.rtl .dropdownjs > ul > li > .close:before {
+  right: auto;
+  left: 15px;
+  float: left;
 }
