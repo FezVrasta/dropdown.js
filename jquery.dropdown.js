@@ -328,7 +328,7 @@
 
       // Behavior for single select
       if (!multi) {
-        if ($target.attr("disabled")) {
+        if ($target.hasClass("disabled")) {
           return;
         }
         // Unselect options except the one that will be selected
