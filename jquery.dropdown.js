@@ -180,7 +180,7 @@
         });
 
         $select.on("DOMNodeRemoved", function(e) {
-          var deletedValue = e.target.getAttribute('value');
+          var deletedValue = $(e.target).attr('value');
           $ul.find("li[value='"+deletedValue+"']").remove();
           var $selected;
 
@@ -264,6 +264,9 @@
 
           // Close opened dropdowns
           $(".dropdownjs > ul > li").attr("tabindex", -1);
+            if ($(e.target).hasClass('disabled')) {
+              return;
+        }
           $input.removeClass("focus");
         });
       }
@@ -292,6 +295,7 @@
       methods._select($(this), $target);
     },
     _select: function($dropdown, $target) {
+
       if ($target.is(".dropdownjs-add")) return;
 
       // Get dropdown's elements
@@ -324,6 +328,9 @@
 
       // Behavior for single select
       if (!multi) {
+        if ($target.hasClass("disabled")) {
+          return;
+        }
         // Unselect options except the one that will be selected
         if ($target.is("li")) {
             selectOptions.not($target).removeClass("selected");
@@ -382,6 +389,10 @@
       if ($this.prop("selected")) {
         $option.attr("selected", true);
         $option.addClass("selected");
+      }
+
+      if ($this.prop("disabled")) {
+        $option.addClass("disabled");
       }
 
       // Append option to our dropdown
