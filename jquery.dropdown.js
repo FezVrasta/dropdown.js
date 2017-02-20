@@ -180,7 +180,7 @@
         });
 
         $select.on("DOMNodeRemoved", function(e) {
-          var deletedValue = e.target.getAttribute('value');
+          var deletedValue = $(e.target).attr('value');
           $ul.find("li[value='"+deletedValue+"']").remove();
           var $selected;
 
