@@ -264,8 +264,8 @@
 
           // Close opened dropdowns
           $(".dropdownjs > ul > li").attr("tabindex", -1);
-          if (e.target.getAttribute('disabled')) {
-          return;
+            if ($(e.target).hasClass('disabled')) {
+              return;
         }
           $input.removeClass("focus");
         });
@@ -392,7 +392,6 @@
       }
 
       if ($this.prop("disabled")) {
-        $option.attr("disabled", true);
         $option.addClass("disabled");
       }
 
