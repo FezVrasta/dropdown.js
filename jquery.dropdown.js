@@ -314,17 +314,18 @@
         $target.toggleClass("selected");
         // Toggle selection of the clicked option in native select
         $target.each(function(){
-          var $selected = $select.find("[value=\"" + $(this).data("value") + "\"]");
+          var value = $(this).prop("tagName") === "OPTION" ? $(this).val() : $(this).data("value"),
+              $selected = $select.find("[value=\"" + value + "\"]");
           $selected.prop("selected", $(this).hasClass("selected"));
         });
         // Add or remove the value from the input
         var text = [];
         selectOptions.each(function() {
           if ($(this).hasClass("selected")) {
-            text.push($(this).data("value"));
+            text.push($(this).text());
           }
         });
-        $input.val(text.join(","));
+        $input.val(text.join(", "));
       }
 
       // Behavior for single select
@@ -338,10 +339,17 @@
         }
         // Select the selected option
         $target.addClass("selected");
-        // Set the value to the native select
-        $select.val($target.data("value"));
         // Set the value to the input
         $input.val($target.text().trim());
+        var value = $target.prop("tagName") === "OPTION" ? $target.val() : $target.data("value");
+        // When val is set below on $select, it will fire change event,
+        // which ends up back here, make sure to not end up in an infinite loop.
+        // This is done last so text input is initialized on first load when condition is true.
+        if (value === $select.val()) {
+          return;
+        }
+        // Set the value to the native select
+        $select.val(value);
       }
 
       // This is used only if Material Design for Bootstrap is selected
@@ -353,10 +361,10 @@
         }
       }
 
-       // Call the callback
-        if (this.options.onSelected) {
-            this.options.onSelected($target.data("value"));
-        }
+      // Call the callback
+      if (this.options.onSelected) {
+        this.options.onSelected($target.data("value"));
+      }
 
     },
     _addOption: function($ul, $this) {
