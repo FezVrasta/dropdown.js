@@ -103,10 +103,10 @@
         } else {
             var selectors = [], val = $select.val()
             for (var i in val) {
-              selectors.push('li[value=' + val[i] + ']')
+              selectors.push(val[i]);
             }
             if (selectors.length > 0) {
-              var $target = $dropdown.find(selectors.join(','));
+              var $target = $dropdown.find(function() { return $.inArray($(this).data("value"), selectors) !== -1; });
               $target.removeClass("selected");
               methods._select($dropdown, $target);
             }
@@ -181,7 +181,7 @@
 
         $select.on("DOMNodeRemoved", function(e) {
           var deletedValue = $(e.target).attr('value');
-          $ul.find("li[value='"+deletedValue+"']").remove();
+          $ul.find("li").filter(function() { return $(this).data("value") === deletedValue; }).remove();
           var $selected;
 
           setTimeout(function () {
@@ -210,12 +210,13 @@
             }
             methods._select($dropdown, $selected);
           } else {
-            var target = $select.find(":selected");
+            var target = $select.find(":selected"),
+                values = $(this).val();
             // Unselect all options
             selectOptions.removeClass("selected");
             // Select options
             target.each(function () {
-                var selected = selectOptions.filter("[value=\"" + $(this).attr("value") + "\"]");
+                var selected = selectOptions.filter(function() { return $.inArray($(this).data("value"), values) !== -1; });
                 selected.addClass("selected");
             });
           }
@@ -291,7 +292,7 @@
       });
     },
     select: function(target) {
-      var $target = $(this).find("[value=\"" + target + "\"]");
+      var $target = $(this).find(function() { return $(this).data("value") === target; });
       methods._select($(this), $target);
     },
     _select: function($dropdown, $target) {
@@ -313,17 +314,17 @@
         $target.toggleClass("selected");
         // Toggle selection of the clicked option in native select
         $target.each(function(){
-          var $selected = $select.find("[value=\"" + $(this).attr("value") + "\"]");
+          var $selected = $select.find("[value=\"" + $(this).data("value") + "\"]");
           $selected.prop("selected", $(this).hasClass("selected"));
         });
         // Add or remove the value from the input
         var text = [];
         selectOptions.each(function() {
           if ($(this).hasClass("selected")) {
-            text.push($(this).text());
+            text.push($(this).data("value"));
           }
         });
-        $input.val(text.join(", "));
+        $input.val(text.join(","));
       }
 
       // Behavior for single select
@@ -338,7 +339,7 @@
         // Select the selected option
         $target.addClass("selected");
         // Set the value to the native select
-        $select.val($target.attr("value"));
+        $select.val($target.data("value"));
         // Set the value to the input
         $input.val($target.text().trim());
       }
@@ -354,7 +355,7 @@
 
        // Call the callback
         if (this.options.onSelected) {
-            this.options.onSelected($target.attr("value"));
+            this.options.onSelected($target.data("value"));
         }
 
     },
@@ -374,7 +375,7 @@
         $option.html("&nbsp;");
       }
       // Set the value of the option
-      $option.attr("value", $this.val());
+      $option.data("value", $this.val());
 
       // Will user be able to remove this option?
       if ($ul.data("select").attr("data-dynamic-opts")) {
@@ -419,3 +420,4 @@
   };
 
 }));
+
